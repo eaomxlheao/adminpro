@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
   selector: "app-incrementador",
@@ -6,15 +6,11 @@ import { Component, OnInit } from "@angular/core";
   styles: [],
 })
 export class IncrementadorComponent implements OnInit {
-  leyenda: string;
-  porcentaje: number;
-  constructor() {
-    this.porcentaje = 0;
-  }
+  @Input() leyenda: string = "Leyenda";
+  @Input() porcentaje: number = 0;
+  constructor() {}
 
-  ngOnInit(): void {
-    this.leyenda = "Leyenda";
-  }
+  ngOnInit(): void {}
 
   public cambiarValor(valor: number) {
     this.porcentaje = +this.porcentaje;
