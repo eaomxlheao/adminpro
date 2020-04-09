@@ -6,6 +6,10 @@
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [attr.ariaValuenow]="porcentaje" aria-valuemin="0" aria-valuemax="100" [style.width]="porcentaje + '%'"></div>
                 </div>
+                <br />
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" [attr.ariaValuenow]="porcentaje" aria-valuemin="0" aria-valuemax="100" [style.width]="porcentaje + '%'"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -15,26 +19,14 @@
     <div class="col-6">
         <div class="card">
             <div class="card-body">
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button" (click)="cambiarValor(-5)">
-                            <i class="mdi mdi-minus"></i>
-                        </button>
-                    </span>
-                    <input type="text" class="form-control" name="porcentaje" [(ngModel)]="porcentaje">
-                    <span class="input-group-btn">                      
-                        <button class="btn btn-primary" type="button" (click)="cambiarValor(+5)">
-                            <i class="mdi mdi-plus"></i>
-                        </button>
-                    </span>
-                </div>
+                <app-incrementador></app-incrementador>
             </div>
         </div>
     </div>
     <div class="col-6">
         <div class="card">
             <div class="card-body">
-                text 2
+                <app-incrementador></app-incrementador>
             </div>
         </div>
     </div>
