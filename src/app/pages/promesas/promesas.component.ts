@@ -6,7 +6,15 @@ import { Component, OnInit } from "@angular/core";
 })
 export class PromesasComponent implements OnInit {
   constructor() {
-    let promesa = new Promise((resolve, reject) => {
+    this.contar3()
+      .then((mensaje) => console.log("Termino", mensaje))
+      .catch((mensaje) => console.log("Error en la promesa", mensaje));
+  }
+
+  ngOnInit(): void {}
+
+  contar3() {
+    return new Promise((resolve, reject) => {
       let contador = 0;
 
       let intervalo = setInterval(() => {
@@ -14,7 +22,7 @@ export class PromesasComponent implements OnInit {
         console.log(contador);
 
         if (contador === 3) {
-          resolve("OK!");
+          resolve(true);
           clearInterval(intervalo); //Detiene la promesa
         } else if (contador >= 4) {
           reject("Fallo en intervalo, contador >3");
@@ -22,11 +30,5 @@ export class PromesasComponent implements OnInit {
         }
       }, 1000);
     });
-
-    promesa
-      .then((mensaje) => console.log("Termino", mensaje))
-      .catch((mensaje) => console.log("Error en la promesa", mensaje));
   }
-
-  ngOnInit(): void {}
 }
