@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import Swal from "sweetalert2";
 
 declare function init_plugins();
 
@@ -30,8 +31,8 @@ export class RegisterComponent implements OnInit {
       nombre: "EduArdO",
       correo: "eaomxlheao@gmail.com",
       password: "moquito1",
-      password2: "moquito2",
-      condiciones: true,
+      password2: "moquito1",
+      condiciones: false,
     });
   }
 
@@ -40,8 +41,12 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    if (this.forma.value.condiciones) {
-      console.log("Debe aceptar las condiciones");
+    if (!this.forma.value.condiciones) {
+      Swal.fire({
+        title: "Importante",
+        text: "Debe aceptar las condiciones",
+        icon: "warning",
+      });
     }
 
     console.log(this.forma.value);
@@ -56,7 +61,7 @@ export class RegisterComponent implements OnInit {
         return null;
       }
       return {
-        sonIguales: true,
+        sonDiferentes: true,
       };
     };
   }
