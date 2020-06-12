@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import Swal from "sweetalert2";
+import { UsuarioService } from "../services/service.index";
+import { Usuario } from "../models/usuario.model";
+import { Router } from "@angular/router";
 
 declare function init_plugins();
 
@@ -12,7 +15,7 @@ declare function init_plugins();
 export class RegisterComponent implements OnInit {
   forma: FormGroup;
 
-  constructor() {}
+  constructor(public usuarioService: UsuarioService, public router: Router) {}
 
   ngOnInit(): void {
     init_plugins();
@@ -32,7 +35,7 @@ export class RegisterComponent implements OnInit {
       correo: "eaomxlheao@gmail.com",
       password: "moquito1",
       password2: "moquito1",
-      condiciones: false,
+      condiciones: true,
     });
   }
 
@@ -49,7 +52,15 @@ export class RegisterComponent implements OnInit {
       });
     }
 
-    console.log(this.forma.value);
+    let usuario = new Usuario(
+      this.forma.value.nombre,
+      this.forma.value.correo,
+      this.forma.value.password
+    );
+
+    this.usuarioService
+      .crearUsuario(usuario)
+      .subscribe((resp) => this.router.navigate(["/login"]));
   }
 
   sonIguales(campo1: string, campo2: string) {
