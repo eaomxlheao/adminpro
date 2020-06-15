@@ -14,8 +14,9 @@ import { Graficas1Component } from "./graficas1/graficas1.component";
 import { IncrementadorComponent } from "../components/incrementador/incrementador.component";
 import { AccountSettingsComponent } from "./account-settings/account-settings.component";
 import { GraficoDonaComponent } from "../components/grafico-dona/grafico-dona.component";
-import { PromesasComponent } from './promesas/promesas.component';
-import { RXJSComponent } from './rxjs/rxjs.component';
+import { PromesasComponent } from "./promesas/promesas.component";
+import { RXJSComponent } from "./rxjs/rxjs.component";
+import { PipesModule } from "../pipes/pipes.module";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,6 @@ import { RXJSComponent } from './rxjs/rxjs.component';
     RXJSComponent,
   ],
   exports: [DashboardComponent, ProgressComponent, Graficas1Component],
-  imports: [SharedModule, PAGES_ROUTES, FormsModule, ChartsModule],
+  imports: [SharedModule, PAGES_ROUTES, FormsModule, ChartsModule, PipesModule],
 })
 export class PagesModule {}
