@@ -5,6 +5,7 @@ import { URL_SERVICIOS } from "../../config/config";
 import { map } from "rxjs/operators";
 
 import Swal from "sweetalert2";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -13,7 +14,7 @@ export class UsuarioService {
   usuario: Usuario;
   token: string;
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public router: Router) {
     this.cargarStorage();
   }
 
@@ -50,6 +51,17 @@ export class UsuarioService {
         return true;
       })
     );
+  }
+
+  logout() {
+    this.usuario = null;
+    this.token = "";
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("usuario");
+    localStorage.removeItem("id");
+
+    this.router.navigate(["/login"]);
   }
 
   login(usuario: Usuario, recordar: boolean = false) {
