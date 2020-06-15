@@ -13,11 +13,16 @@ declare function init_plugins();
   styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
+  public email: string;
   public recuerdame: boolean = false;
   constructor(public router: Router, public usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
     init_plugins();
+    this.email = localStorage.getItem("email") || "";
+    if (this.email.length > 0) {
+      this.recuerdame = true;
+    }
   }
 
   ingresar(forma: NgForm) {
