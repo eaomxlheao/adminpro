@@ -1,0 +1,46 @@
+<div class="row animated fadeIn">
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Sample Form with the Icons</h4>
+                <h6 class="card-subtitle"></h6>
+                <form ngNativeValidate #forma="ngForm" (ngSubmit)="guardar(forma.value)" class="form p-t-20">
+                    <div class="form-group">
+                        <label for="exampleInputuname">User Name</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input [ngModel]="usuario.nombre" name="nombre" type="text" class="form-control" id="exampleInputuname" placeholder="Username" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                            <input [ngModel]="usuario.email" [disabled]="usuario.google" name="email" type="email" class="form-control" placeholder="Enter email" required />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+            <i class="fa fa-save"></i>
+            Submit
+          </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">User's Picture</h4>
+                <h6 class="card-subtitle"></h6>
+                <img src="{{ usuario.imagen | imagen }}" alt="User's picture" />
+                <input type="file" />
+                <br />
+                <br />
+                <button type="button" class="btn btn-block btn-success waves-effect waves-light m-r-10">
+          <i class="fa fa-save"></i>
+          Update picture
+        </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -36,11 +36,15 @@ export class UsuarioService {
   }
 
   guardarStorage(id: string, token: string, usuario: Usuario) {
-    localStorage.setItem("id", id);
+    this.guardarUsuarioEnLocalStorage(id, usuario);
     localStorage.setItem("token", token);
+    this.token = token;
+  }
+
+  guardarUsuarioEnLocalStorage(id: string, usuario: Usuario) {
+    localStorage.setItem("id", id);
     localStorage.setItem("usuario", JSON.stringify(usuario));
     this.usuario = usuario;
-    this.token = token;
   }
 
   loginGoogle(token: string) {
@@ -53,14 +57,16 @@ export class UsuarioService {
     );
   }
 
-  logout() {
+  limpiarUsuarioDeLocalStorage() {
     this.usuario = null;
-    this.token = "";
-
-    localStorage.removeItem("token");
     localStorage.removeItem("usuario");
     localStorage.removeItem("id");
+  }
 
+  logout() {
+    this.token = "";
+    localStorage.removeItem("token");
+    this.limpiarUsuarioDeLocalStorage();
     this.router.navigate(["/login"]);
   }
 
@@ -92,5 +98,25 @@ export class UsuarioService {
         return resp.usuario;
       })
     );
+  }
+
+  actualizarUsuario(usuario: Usuario) {
+    let url = URL_SERVICIOS + "/usuario/" + usuario._id;
+    return this.http
+      .put(url, usuario, {
+        headers: { Token: localStorage.getItem("token") },
+      })
+      .pipe(
+        map((resp: any) => {
+          this.limpiarUsuarioDeLocalStorage();
+          this.guardarUsuarioEnLocalStorage(resp.usuario._id, resp.usuario);
+          Swal.fire({
+            title: "Updated user",
+            text: resp.usuario.nombre,
+            icon: "success",
+          });
+          return resp.usuario;
+        })
+      );
   }
 }
