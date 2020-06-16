@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Usuario } from "src/app/models/usuario.model";
 import { UsuarioService } from "../../services/usuario/usuario.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-profile",
@@ -9,6 +10,8 @@ import { UsuarioService } from "../../services/usuario/usuario.service";
 })
 export class ProfileComponent implements OnInit {
   public usuario: Usuario;
+  public imagenASubir: File;
+  public imagenTemp: string;
 
   constructor(public usuarioService: UsuarioService) {}
 
@@ -22,5 +25,32 @@ export class ProfileComponent implements OnInit {
       this.usuario.email = usuario.email;
     }
     this.usuarioService.actualizarUsuario(this.usuario).subscribe((resp) => {});
+  }
+
+  seleccionarImagen(archivo: File) {
+    if (!archivo) {
+      this.imagenASubir = null;
+      return;
+    }
+
+    if (archivo.type.indexOf("image") < 0) {
+      Swal.fire({
+        title: "Only images",
+        text: "The selected file is not an image",
+        icon: "error",
+      });
+      this.imagenASubir = null;
+      return;
+    }
+
+    this.imagenASubir = archivo;
+
+    let reader = new FileReader();
+    let urlImagenTemp = reader.readAsDataURL(archivo);
+    reader.onloadend = () => (this.imagenTemp = reader.result as string);
+  }
+
+  cambiarImagen() {
+    this.usuarioService.guardarImagen(this.imagenASubir, this.usuario._id);
   }
 }

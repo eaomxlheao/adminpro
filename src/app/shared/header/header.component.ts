@@ -7,12 +7,9 @@ import { Usuario } from "src/app/models/usuario.model";
   templateUrl: "./header.component.html",
 })
 export class HeaderComponent implements OnInit {
-  public usuario: Usuario;
   constructor(public usuarioService: UsuarioService) {}
 
-  ngOnInit(): void {
-    this.usuario = this.usuarioService.usuario;
-  }
+  ngOnInit(): void {}
 
   logout() {
     this.usuarioService.logout();

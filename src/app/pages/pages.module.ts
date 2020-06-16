@@ -17,7 +17,8 @@ import { GraficoDonaComponent } from "../components/grafico-dona/grafico-dona.co
 import { PromesasComponent } from "./promesas/promesas.component";
 import { RXJSComponent } from "./rxjs/rxjs.component";
 import { PipesModule } from "../pipes/pipes.module";
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from "./profile/profile.component";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,13 @@ import { ProfileComponent } from './profile/profile.component';
     ProfileComponent,
   ],
   exports: [DashboardComponent, ProgressComponent, Graficas1Component],
-  imports: [SharedModule, PAGES_ROUTES, FormsModule, ChartsModule, PipesModule],
+  imports: [
+    SharedModule,
+    PAGES_ROUTES,
+    FormsModule,
+    ChartsModule,
+    PipesModule,
+    CommonModule,
+  ],
 })
 export class PagesModule {}

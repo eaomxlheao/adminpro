@@ -7,15 +7,12 @@ import { Usuario } from "../../models/usuario.model";
   templateUrl: "./sidebar.component.html",
 })
 export class SidebarComponent implements OnInit {
-  public usuario: Usuario;
   constructor(
     public sideBarService: SidebarService,
     public usuarioService: UsuarioService
   ) {}
 
-  ngOnInit(): void {
-    this.usuario = this.usuarioService.usuario;
-  }
+  ngOnInit(): void {}
 
   logout() {
     this.usuarioService.logout();
