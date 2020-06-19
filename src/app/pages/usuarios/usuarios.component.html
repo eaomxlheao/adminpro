@@ -43,11 +43,24 @@
         <tbody>
           <tr *ngFor="let usuario of usuarios">
             <td class="w70">
-              <img class="w50 img-circle" src="{{ usuario.imagen | imagen }}" />
+              <img
+                (click)="mostrarModal(usuario._id)"
+                class="w50 img-circle pointer"
+                src="{{ usuario.imagen | imagen }}"
+              />
             </td>
             <td>{{ usuario.email }}</td>
             <td>{{ usuario.nombre }}</td>
-            <td>{{ usuario.role }}</td>
+            <td>
+              <select
+                [(ngModel)]="usuario.role"
+                name="role"
+                class="form-control"
+              >
+                <option value="ADMIN_ROLE">Admin</option>
+                <option value="USER_ROLE">User</option>
+              </select>
+            </td>
             <td>
               <label *ngIf="usuario.google" class="label label-danger"
                 >Google</label
@@ -57,10 +70,14 @@
               >
             </td>
             <td>
-              <button class="btn btn-primary">
+              <button (click)="guardarUsuario(usuario)" class="btn btn-primary">
                 <i class="fa fa-save"></i>
               </button>
-              <button class="btn btn-danger">
+              <button
+                *ngIf="usuarioService.usuario._id !== usuario._id"
+                (click)="borrarUsuario(usuario._id)"
+                class="btn btn-danger"
+              >
                 <i class="fa fa-trash-o"></i>
               </button>
             </td>

@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Usuario } from "../../models/usuario.model";
-import { UsuarioService } from "../../services/service.index";
+import {
+  UsuarioService,
+  ModalUploadService,
+} from "../../services/service.index";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-usuarios",
@@ -13,10 +17,16 @@ export class UsuariosComponent implements OnInit {
   totalRegistros: number = 0;
   cargando: boolean = true;
 
-  constructor(public usuarioService: UsuarioService) {}
+  constructor(
+    public usuarioService: UsuarioService,
+    public modalUploadService: ModalUploadService
+  ) {}
 
   ngOnInit(): void {
     this.cargarUsuarios();
+    this.modalUploadService.notificacion.subscribe((resp) => {
+      this.cargarUsuarios();
+    });
   }
 
   cargarUsuarios() {
@@ -53,5 +63,36 @@ export class UsuariosComponent implements OnInit {
       this.totalRegistros = this.usuarios.length;
       this.cargando = false;
     });
+  }
+
+  borrarUsuario(id: string) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.value) {
+        this.usuarioService.buscarUsuario(id).subscribe((resp) => {
+          Swal.fire("Deleted!", "The user has been deleted.", "success");
+          this.cargarUsuarios();
+          if (this.usuarios.length === 0) {
+            this.desde = 0;
+            this.cargarUsuarios();
+          }
+        });
+      }
+    });
+  }
+
+  guardarUsuario(usuario: Usuario) {
+    this.usuarioService.actualizarUsuario(usuario).subscribe((resp) => {});
+  }
+
+  mostrarModal(id: string) {
+    this.modalUploadService.mostrarModal("usuarios", id);
   }
 }

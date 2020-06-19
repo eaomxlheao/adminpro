@@ -8,7 +8,7 @@ import { URL_SERVICIOS } from "../../config/config";
 export class SubirArchivoService {
   constructor() {}
 
-  subirARchivo(archivo: File, tipo: string, id: string) {
+  subirArchivo(archivo: File, tipo: string, id: string) {
     return new Promise((resolve, reject) => {
       let formData = new FormData();
       let xhr = new XMLHttpRequest();
@@ -16,10 +16,8 @@ export class SubirArchivoService {
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
-            console.log("imagen subida");
             resolve(JSON.parse(xhr.response));
           } else {
-            console.log("fallo la subida");
             reject(xhr.response);
           }
         }

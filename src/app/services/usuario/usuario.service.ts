@@ -113,8 +113,10 @@ export class UsuarioService {
       })
       .pipe(
         map((resp: any) => {
-          this.limpiarUsuarioDeLocalStorage();
-          this.guardarUsuarioEnLocalStorage(resp.usuario._id, resp.usuario);
+          if (this.usuario._id === resp.usuario._id) {
+            this.limpiarUsuarioDeLocalStorage();
+            this.guardarUsuarioEnLocalStorage(resp.usuario._id, resp.usuario);
+          }
           Swal.fire({
             title: "Updated user",
             text: resp.usuario.nombre,
@@ -127,7 +129,7 @@ export class UsuarioService {
 
   guardarImagen(archivo: File, id: string) {
     this.subirArchivoService
-      .subirARchivo(archivo, "usuarios", id)
+      .subirArchivo(archivo, "usuarios", id)
       .then((resp: any) => {
         this.guardarUsuarioEnLocalStorage(resp.usuario._id, resp.usuario);
         Swal.fire({
@@ -158,5 +160,18 @@ export class UsuarioService {
         return resp.usuarios;
       })
     );
+  }
+
+  borrarUsuario(id: string) {
+    let url = URL_SERVICIOS + "/usuario/" + id;
+    return this.http
+      .delete(url, {
+        headers: { Token: localStorage.getItem("token") },
+      })
+      .pipe(
+        map((resp: any) => {
+          return true;
+        })
+      );
   }
 }
