@@ -46,7 +46,7 @@
               <img
                 (click)="mostrarModal(usuario._id)"
                 class="w50 img-circle pointer"
-                src="{{ usuario.imagen | imagen }}"
+                src="{{ usuario.imagen | imagen: 'usuario' }}"
               />
             </td>
             <td>{{ usuario.email }}</td>

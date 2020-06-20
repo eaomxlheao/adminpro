@@ -32,15 +32,15 @@
             <div class="card-body">
                 <h4 class="card-title">User's Picture</h4>
                 <h6 class="card-subtitle"></h6>
-                <img *ngIf="!imagenTemp" [src]="usuarioService.usuario.imagen | imagen" alt="user" class="w150" />
-                <img *ngIf="imagenTemp" [src]="imagenTemp" alt="user" class="w150" />
+                <img *ngIf="!imagenTemp" [src]="usuarioService.usuario.imagen | imagen: 'usuario' " alt="user " class="w150 " />
+                <img *ngIf="imagenTemp " [src]="imagenTemp " alt="user " class="w150 " />
                 <br />
                 <br />
-                <input (change)="seleccionarImagen($event.target.files[0])" type="file" />
+                <input (change)="seleccionarImagen($event.target.files[0]) " type="file " />
                 <br />
                 <br />
-                <button (click)="cambiarImagen()" [disabled]="!imagenASubir" type="button" class="btn btn-block btn-success waves-effect waves-light m-r-10">
-          <i class="fa fa-save"></i>
+                <button (click)="cambiarImagen() " [disabled]="!imagenASubir " type="button " class="btn btn-block btn-success waves-effect waves-light m-r-10 ">
+          <i class="fa fa-save "></i>
           Update picture
         </button>
             </div>

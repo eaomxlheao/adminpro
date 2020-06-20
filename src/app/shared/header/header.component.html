@@ -163,13 +163,13 @@
                 <!-- Profile -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img [src]="usuarioService.usuario.imagen | imagen" alt="user" class="profile-pic" /></a>
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img [src]="usuarioService.usuario.imagen | imagen: 'usuario'" alt="user" class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right animated fadeIn">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box" align="center">
                                     <div class="u-img">
-                                        <img [src]="usuarioService.usuario.imagen | imagen" alt="user" />
+                                        <img [src]="usuarioService.usuario.imagen | imagen: 'usuario'" alt="user" />
                                     </div>
                                     <div class="u-text">
                                         <h4>{{ usuarioService.usuario.nombre }}</h4>

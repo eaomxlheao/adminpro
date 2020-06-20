@@ -96,7 +96,7 @@ export class UsuarioService {
     return this.http.post(url, usuario).pipe(
       map((resp: any) => {
         Swal.fire({
-          title: "Usuario creado",
+          title: "Created user",
           text: usuario.email,
           icon: "success",
         });

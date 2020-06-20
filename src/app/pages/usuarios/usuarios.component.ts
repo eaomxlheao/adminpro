@@ -54,6 +54,7 @@ export class UsuariosComponent implements OnInit {
   buscarUsuario(termino: string) {
     if (termino.length <= 2) {
       this.cargarUsuarios();
+      return;
     }
 
     this.cargando = true;

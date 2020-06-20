@@ -9,7 +9,7 @@
           </button>
                 </div>
                 <div class="modal-body" align="center">
-                    <img *ngIf="!imagenTemp" [src]="'xxx' | imagen" alt="user" class="w150" />
+                    <img *ngIf="!imagenTemp" [src]="'xxx' | imagen:'usuario'" alt="user" class="w150" />
                     <img *ngIf="imagenTemp" [src]="imagenTemp" alt="user" class="w150" />
                     <br />
                     <br />
