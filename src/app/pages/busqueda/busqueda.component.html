@@ -1,0 +1,59 @@
+<div class="row animated fadeIn">
+    <div class="col-4">
+        <div class="card">
+            <div class="card card-body">
+                <h4 class="card card-title">Users</h4>
+                <table *ngIf="usuarios.length!==0" class="table table-hover">
+                    <tbody>
+                        <tr routerLink="/usuarios" class="pointer" *ngFor="let usuario of usuarios">
+                            <td><img class="w50 img-circle" src="{{ usuario.imagen | imagen: 'usuario' }}"></td>
+                            <td>{{usuario.nombre}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="usuarios.length===0" class="alert alert-info">
+                    No records
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card card-body">
+                <h4 class="card card-title">Hospitals</h4>
+                <table *ngIf="hospitales.length!==0" class="table table-hover">
+                    <tbody>
+                        <tr routerLink="/hospitales" class="pointer" *ngFor="let hospital of hospitales">
+                            <td><img class="w50 img-fluid" src="{{ hospital.imagen | imagen: 'hospital' }}"></td>
+                            <td>{{hospital.nombre}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="hospitales.length===0" class="alert alert-info">
+                    No records
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card card-body">
+                <h4 class="card card-title">Doctors</h4>
+                <table *ngIf="medicos.length!==0" class="table table-hover">
+                    <tbody>
+                        <tr class="pointer" *ngFor="let medico of medicos" [routerLink]="['/medico', medico._id]">
+                            <td><img class="w50 img-fluid" src="{{ medico.imagen | imagen: 'medico' }}"></td>
+                            <td>{{medico.nombre}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="medicos.length===0" class="alert alert-info">
+                    No records
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

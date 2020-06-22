@@ -12,7 +12,9 @@ export class SidebarComponent implements OnInit {
     public usuarioService: UsuarioService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sideBarService.cargarMenu();
+  }
 
   logout() {
     this.usuarioService.logout();
