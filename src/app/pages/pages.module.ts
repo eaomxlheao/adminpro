@@ -21,7 +21,9 @@ import { ProfileComponent } from "./profile/profile.component";
 import { CommonModule } from "@angular/common";
 import { UsuariosComponent } from "./usuarios/usuarios.component";
 import { ModalUploadComponent } from "../components/modal-upload/modal-upload.component";
-import { HospitalesComponent } from './hospitales/hospitales.component';
+import { HospitalesComponent } from "./hospitales/hospitales.component";
+import { MedicosComponent } from "./medicos/medicos.component";
+import { MedicoComponent } from "./medicos/medico.component";
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { HospitalesComponent } from './hospitales/hospitales.component';
     UsuariosComponent,
     ModalUploadComponent,
     HospitalesComponent,
+    MedicosComponent,
+    MedicoComponent,
   ],
   exports: [DashboardComponent, ProgressComponent, Graficas1Component],
   imports: [

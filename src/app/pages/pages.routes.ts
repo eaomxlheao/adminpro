@@ -11,6 +11,8 @@ import { LoginGuard } from "../services/service.index";
 import { ProfileComponent } from "./profile/profile.component";
 import { UsuariosComponent } from "./usuarios/usuarios.component";
 import { HospitalesComponent } from "./hospitales/hospitales.component";
+import { MedicosComponent } from "./medicos/medicos.component";
+import { MedicoComponent } from "./medicos/medico.component";
 
 const pagesRoutes: Routes = [
   {
@@ -58,6 +60,16 @@ const pagesRoutes: Routes = [
         path: "hospitales",
         component: HospitalesComponent,
         data: { titulo: "Gestion de Hospitales" },
+      },
+      {
+        path: "medicos",
+        component: MedicosComponent,
+        data: { titulo: "Gestion de Medicos" },
+      },
+      {
+        path: "medico/:id",
+        component: MedicoComponent,
+        data: { titulo: "Actualizar Medico" },
       },
       { path: "", redirectTo: "/dashboard", pathMatch: "full" },
     ],
