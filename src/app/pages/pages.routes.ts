@@ -1,5 +1,4 @@
 import { RouterModule, Routes } from "@angular/router";
-
 import { PagesComponent } from "./pages.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ProgressComponent } from "./progress/progress.component";
@@ -7,7 +6,7 @@ import { Graficas1Component } from "./graficas1/graficas1.component";
 import { AccountSettingsComponent } from "./account-settings/account-settings.component";
 import { PromesasComponent } from "./promesas/promesas.component";
 import { RXJSComponent } from "./rxjs/rxjs.component";
-import { LoginGuard } from "../services/service.index";
+import { LoginGuard, AdminGuard } from "../services/service.index";
 import { ProfileComponent } from "./profile/profile.component";
 import { UsuariosComponent } from "./usuarios/usuarios.component";
 import { HospitalesComponent } from "./hospitales/hospitales.component";
@@ -54,6 +53,7 @@ const pagesRoutes: Routes = [
       },
       {
         path: "usuarios",
+        canActivate: [AdminGuard],
         component: UsuariosComponent,
         data: { titulo: "Gestion de Usuarios" },
       },
