@@ -2,9 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { Usuario } from "../models/usuario.model";
-import { HttpClient } from "@angular/common/http";
 import { UsuarioService } from "../services/service.index";
 import { element } from "protractor";
+import Swal from "sweetalert2";
 
 declare function init_plugins();
 declare const gapi: any;
@@ -64,11 +64,26 @@ export class LoginComponent implements OnInit {
       forma.value.email,
       forma.value.password
     );
+    /*
     this.usuarioService
       .login(usuario, forma.value.recuerdame)
       .subscribe((resp: any) => {
         //this.router.navigate(["/dashboard"]);
         window.location.href = "#/dashboard";
+      
       });
+      */
+    this.usuarioService.login(usuario, forma.value.recuerdame).subscribe(
+      (ok) => {
+        window.location.href = "#/dashboard";
+      },
+      (err) => {
+        Swal.fire({
+          title: "Login error",
+          text: err,
+          icon: "error",
+        });
+      }
+    );
   }
 }

@@ -2,11 +2,12 @@ import { Injectable } from "@angular/core";
 import { Usuario } from "../../models/usuario.model";
 import { HttpClient } from "@angular/common/http";
 import { URL_SERVICIOS } from "../../config/config";
-import { map } from "rxjs/operators";
+import { map, catchError } from "rxjs/operators";
 
 import Swal from "sweetalert2";
 import { Router } from "@angular/router";
 import { SubirArchivoService } from "../subir-archivo/subir-archivo.service";
+import { throwError } from "rxjs/internal/observable/throwError";
 
 @Injectable({
   providedIn: "root",
@@ -104,6 +105,9 @@ export class UsuarioService {
           resp.menu
         );
         return true;
+      }),
+      catchError((err) => {
+        return throwError(err.error.message);
       })
     );
   }
