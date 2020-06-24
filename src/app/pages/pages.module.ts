@@ -24,11 +24,12 @@ import { ModalUploadComponent } from "../components/modal-upload/modal-upload.co
 import { HospitalesComponent } from "./hospitales/hospitales.component";
 import { MedicosComponent } from "./medicos/medicos.component";
 import { MedicoComponent } from "./medicos/medico.component";
-import { BusquedaComponent } from './busqueda/busqueda.component';
+import { BusquedaComponent } from "./busqueda/busqueda.component";
 
 @NgModule({
   declarations: [
-    PagesComponent,
+    //Lazy Load
+    //PagesComponent,
     DashboardComponent,
     ProgressComponent,
     Graficas1Component,
@@ -39,7 +40,8 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     RXJSComponent,
     ProfileComponent,
     UsuariosComponent,
-    ModalUploadComponent,
+    //Lazy Load
+    //ModalUploadComponent,
     HospitalesComponent,
     MedicosComponent,
     MedicoComponent,
