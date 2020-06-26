@@ -13,6 +13,7 @@ import { HospitalesComponent } from "./hospitales/hospitales.component";
 import { MedicosComponent } from "./medicos/medicos.component";
 import { MedicoComponent } from "./medicos/medico.component";
 import { BusquedaComponent } from "./busqueda/busqueda.component";
+import { VerificaTokenGuard } from "../services/service.index";
 
 const pagesRoutes: Routes = [
   /*
@@ -84,6 +85,7 @@ const pagesRoutes: Routes = [
   {
     path: "dashboard",
     component: DashboardComponent,
+    canActivate: [VerificaTokenGuard],
     data: { titulo: "Dashboard" },
   },
   {

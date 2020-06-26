@@ -25,6 +25,21 @@ export class UsuarioService {
     this.cargarStorage();
   }
 
+  renuevaToken() {
+    let url = URL_SERVICIOS + "/login/renuevatoken";
+    return this.http.get(url, { headers: { Token: this.token } }).pipe(
+      map((resp: any) => {
+        this.token = resp.token;
+        localStorage.setItem("token", this.token);
+        return true;
+      }),
+      catchError((err) => {
+        this.router.navigate(["/login"]);
+        return throwError(err);
+      })
+    );
+  }
+
   estaLogueado(): boolean {
     if (this.token) {
       return this.token.length > 0 ? true : false;

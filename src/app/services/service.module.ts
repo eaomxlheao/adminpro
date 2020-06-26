@@ -13,6 +13,7 @@ import {
   SubirArchivoService,
   ModalUploadService,
   BusquedaService,
+  VerificaTokenGuard,
 } from "./service.index";
 
 import { HttpClientModule } from "@angular/common/http";
@@ -32,6 +33,7 @@ import { HttpClientModule } from "@angular/common/http";
     SubirArchivoService,
     ModalUploadService,
     BusquedaService,
+    VerificaTokenGuard,
   ],
 })
 export class ServiceModule {}
