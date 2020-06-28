@@ -16,7 +16,6 @@ export class VerificaTokenGuard implements CanActivate {
   constructor(public usuarioService: UsuarioService, public router: Router) {}
 
   canActivate(): Promise<boolean> | boolean {
-    console.log("Verifica Token ");
     let token = this.usuarioService.token;
     let payload = JSON.parse(atob(token.split(".")[1]));
     let expirado = this.estaExpirado(payload.exp);
