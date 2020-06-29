@@ -32,39 +32,33 @@ export class MedicoService {
 
   borrarMedico(id: string) {
     let url = URL_SERVICIOS + "/medico/" + id;
-    return this.http
-      .delete(url, { headers: { Token: this.usuarioService.token } })
-      .pipe(
-        map((resp) => {
-          return resp;
-        })
-      );
+    return this.http.delete(url).pipe(
+      map((resp) => {
+        return resp;
+      })
+    );
   }
 
   guardarMedico(medico: Medico) {
     let url = URL_SERVICIOS + "/medico";
     if (medico._id) {
       url = url + "/" + medico._id;
-      this.http
-        .put(url, medico, { headers: { Token: this.usuarioService.token } })
-        .pipe(
-          map((resp: any) => {
-            return resp;
-          })
-        );
+      this.http.put(url, medico).pipe(
+        map((resp: any) => {
+          return resp;
+        })
+      );
     } else {
-      return this.http
-        .post(url, medico, { headers: { Token: this.usuarioService.token } })
-        .pipe(
-          map((resp: any) => {
-            Swal.fire({
-              title: "Doctor created",
-              text: medico.nombre,
-              icon: "success",
-            });
-            return resp.medico;
-          })
-        );
+      return this.http.post(url, medico).pipe(
+        map((resp: any) => {
+          Swal.fire({
+            title: "Doctor created",
+            text: medico.nombre,
+            icon: "success",
+          });
+          return resp.medico;
+        })
+      );
     }
   }
 

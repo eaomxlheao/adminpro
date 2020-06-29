@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ServiceModule } from "./services/service.module";
 import { PagesComponent } from "./pages/pages.component";
 import { SharedModule } from "./shared/shared.module";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { TokenInterceptorService } from "./interceptors/token-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -36,8 +38,15 @@ import { SharedModule } from "./shared/shared.module";
     ServiceModule,
     //Lazy Load
     SharedModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

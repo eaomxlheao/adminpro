@@ -37,35 +37,25 @@ export class HospitalService {
 
   borrarHospital(id: string) {
     let url = URL_SERVICIOS + "/hospital/" + id;
-    return this.http
-      .delete(url, {
-        headers: { Token: this.usuarioService.token },
+    return this.http.delete(url).pipe(
+      map((resp: any) => {
+        return resp;
       })
-      .pipe(
-        map((resp: any) => {
-          return resp;
-        })
-      );
+    );
   }
 
   crearHospital(nombre: string) {
     let url = URL_SERVICIOS + "/hospital";
-    return this.http
-      .post(
-        url,
-        { nombre: nombre },
-        { headers: { Token: this.usuarioService.token } }
-      )
-      .pipe(
-        map((resp: any) => {
-          Swal.fire({
-            title: "Created Hospital",
-            text: nombre,
-            icon: "success",
-          });
-          return resp.hospital;
-        })
-      );
+    return this.http.post(url, { nombre: nombre }).pipe(
+      map((resp: any) => {
+        Swal.fire({
+          title: "Created Hospital",
+          text: nombre,
+          icon: "success",
+        });
+        return resp.hospital;
+      })
+    );
   }
 
   buscarHospital(termino: string) {
@@ -79,18 +69,16 @@ export class HospitalService {
 
   actualizarHospital(hospital: Hospital) {
     let url = URL_SERVICIOS + "/hospital/" + hospital._id;
-    return this.http
-      .put(url, hospital, { headers: { Token: this.usuarioService.token } })
-      .pipe(
-        map((resp: any) => {
-          Swal.fire({
-            title: "Updated hospital",
-            text: resp.hospital.nombre,
-            icon: "success",
-          });
-          return resp.hospital;
-        })
-      );
+    return this.http.put(url, hospital).pipe(
+      map((resp: any) => {
+        Swal.fire({
+          title: "Updated hospital",
+          text: resp.hospital.nombre,
+          icon: "success",
+        });
+        return resp.hospital;
+      })
+    );
   }
 
   guardarImagen(archivo: File, id: string) {

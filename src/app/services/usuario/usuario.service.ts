@@ -27,7 +27,7 @@ export class UsuarioService {
 
   renuevaToken() {
     let url = URL_SERVICIOS + "/login/renuevatoken";
-    return this.http.get(url, { headers: { Token: this.token } }).pipe(
+    return this.http.get(url).pipe(
       map((resp: any) => {
         this.token = resp.token;
         localStorage.setItem("token", this.token);
@@ -143,28 +143,24 @@ export class UsuarioService {
 
   actualizarUsuario(usuario: Usuario) {
     let url = URL_SERVICIOS + "/usuario/" + usuario._id;
-    return this.http
-      .put(url, usuario, {
-        headers: { Token: localStorage.getItem("token") },
+    return this.http.put(url, usuario).pipe(
+      map((resp: any) => {
+        if (this.usuario._id === resp.usuario._id) {
+          this.limpiarUsuarioDeLocalStorage();
+          this.guardarUsuarioEnLocalStorage(
+            resp.usuario._id,
+            resp.usuario,
+            this.menu
+          );
+        }
+        Swal.fire({
+          title: "Updated user",
+          text: resp.usuario.nombre,
+          icon: "success",
+        });
+        return resp.usuario;
       })
-      .pipe(
-        map((resp: any) => {
-          if (this.usuario._id === resp.usuario._id) {
-            this.limpiarUsuarioDeLocalStorage();
-            this.guardarUsuarioEnLocalStorage(
-              resp.usuario._id,
-              resp.usuario,
-              this.menu
-            );
-          }
-          Swal.fire({
-            title: "Updated user",
-            text: resp.usuario.nombre,
-            icon: "success",
-          });
-          return resp.usuario;
-        })
-      );
+    );
   }
 
   guardarImagen(archivo: File, id: string) {
@@ -208,14 +204,10 @@ export class UsuarioService {
 
   borrarUsuario(id: string) {
     let url = URL_SERVICIOS + "/usuario/" + id;
-    return this.http
-      .delete(url, {
-        headers: { Token: localStorage.getItem("token") },
+    return this.http.delete(url).pipe(
+      map((resp: any) => {
+        return true;
       })
-      .pipe(
-        map((resp: any) => {
-          return true;
-        })
-      );
+    );
   }
 }
