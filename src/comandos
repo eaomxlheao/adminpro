@@ -1,0 +1,5 @@
+ng bouild --prod --aot
+
+despues del build en index.html de la carpte dist, borrar la etiqueta <base href="/">
+
+ng test --code-coverage
